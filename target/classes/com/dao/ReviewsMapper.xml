@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ReviewsMapper">
+  <resultMap id="BaseResultMap" type="com.bean.Reviews">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ORDERNUM" jdbcType="VARCHAR" property="ordernum" />
+    <result column="PEOPLENAME" jdbcType="VARCHAR" property="peoplename" />
+    <result column="PEOPLEPHONE" jdbcType="VARCHAR" property="peoplephone" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="REVIEWLEV" jdbcType="DECIMAL" property="reviewlev" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ORDERNUM, PEOPLENAME, PEOPLEPHONE, CONTENT, REVIEWLEV
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.ReviewsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from REVIEWS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bean.ReviewsExample">
+    delete from REVIEWS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.Reviews">
+    insert into REVIEWS (ID, ORDERNUM, PEOPLENAME, 
+      PEOPLEPHONE, CONTENT, REVIEWLEV
+      )
+    values (#{id,jdbcType=DECIMAL}, #{ordernum,jdbcType=VARCHAR}, #{peoplename,jdbcType=VARCHAR}, 
+      #{peoplephone,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{reviewlev,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.Reviews">
+    insert into REVIEWS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="ordernum != null">
+        ORDERNUM,
+      </if>
+      <if test="peoplename != null">
+        PEOPLENAME,
+      </if>
+      <if test="peoplephone != null">
+        PEOPLEPHONE,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="reviewlev != null">
+        REVIEWLEV,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="peoplename != null">
+        #{peoplename,jdbcType=VARCHAR},
+      </if>
+      <if test="peoplephone != null">
+        #{peoplephone,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewlev != null">
+        #{reviewlev,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.ReviewsExample" resultType="java.lang.Long">
+    select count(*) from REVIEWS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update REVIEWS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ordernum != null">
+        ORDERNUM = #{record.ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peoplename != null">
+        PEOPLENAME = #{record.peoplename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peoplephone != null">
+        PEOPLEPHONE = #{record.peoplephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewlev != null">
+        REVIEWLEV = #{record.reviewlev,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update REVIEWS
+    set ID = #{record.id,jdbcType=DECIMAL},
+      ORDERNUM = #{record.ordernum,jdbcType=VARCHAR},
+      PEOPLENAME = #{record.peoplename,jdbcType=VARCHAR},
+      PEOPLEPHONE = #{record.peoplephone,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      REVIEWLEV = #{record.reviewlev,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

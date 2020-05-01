@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//WebContent/jsp/main.jsp=UTF-8
+encoding//WebContent/jsp/order.jsp=UTF-8
+encoding//src/main/java/com/services/IUserService.java=UTF-8
+encoding//src/main/java/com/web/servlet/ToIndexServlet.java=UTF-8
+encoding//src/main/java/com/web/servlet/ToMyOrderServlet.java=UTF-8
+encoding//src/main/java/com/web/servlet/TologinServlet.java=UTF-8
+encoding//src/main/java/com/web/servlet/user/exitUserServlet.java=UTF-8
+encoding/<project>=UTF-8
